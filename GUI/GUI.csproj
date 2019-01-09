@@ -44,6 +44,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -65,6 +66,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>emailAppDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="emailAppDataSet21.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>emailAppDataSet21.xsd</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -111,6 +117,17 @@
     </None>
     <None Include="emailAppDataSet1.xss">
       <DependentUpon>emailAppDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="emailAppDataSet21.xsc">
+      <DependentUpon>emailAppDataSet21.xsd</DependentUpon>
+    </None>
+    <None Include="emailAppDataSet21.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>emailAppDataSet21.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="emailAppDataSet21.xss">
+      <DependentUpon>emailAppDataSet21.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

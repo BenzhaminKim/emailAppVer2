@@ -19,7 +19,9 @@ namespace GUI
         private bool _dragging = false;
         //private Point _offset;
         private Point _start_point = new Point(0, 0);
-        ConnectDB connectDB = new ConnectDB();  
+        ConnectDB connectDB = new ConnectDB();
+        private int ms=0;
+        private int storedMs = 0;
 
         public Form1()
         {
@@ -28,6 +30,8 @@ namespace GUI
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: 이 코드는 데이터를 'emailAppDataSet2.contract' 테이블에 로드합니다. 필요 시 이 코드를 이동하거나 제거할 수 있습니다.
+            //this.contractTableAdapter1.Fill(this.emailAppDataSet2.contract);
             // TODO: 이 코드는 데이터를 'emailAppDataSet1.contract' 테이블에 로드합니다. 필요 시 이 코드를 이동하거나 제거할 수 있습니다.
             RefreshTable();
             // TODO: 이 코드는 데이터를 'emailAppDataSet.address' 테이블에 로드합니다. 필요 시 이 코드를 이동하거나 제거할 수 있습니다.
@@ -37,7 +41,8 @@ namespace GUI
 
         private void RefreshTable()
         {
-            this.contractTableAdapter.Fill(this.emailAppDataSet1.contract);
+            //this.contractTableAdapter.Fill(this.emailAppDataSet1.contract);
+            this.contractTableAdapter1.Fill(this.emailAppDataSet2.contract);
         }
         void DataBind()
         {
@@ -86,35 +91,6 @@ namespace GUI
         private void button3_Click(object sender, EventArgs e)
         {
 
-            // SendToMultipleUsers.SendEmail();
-            ///*
-            /* try
-             {
-                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
-                 MailMessage message = new MailMessage();
-                 message.From = new MailAddress(textEmail.Text);
-                 if (txtdestination.Text != "")
-                 {
-                     message.To.Add(txtdestination.Text);
-                     message.Body = txtbody.Text;
-                     message.Subject = txtsubject.Text;
-                     client.UseDefaultCredentials = false;
-                     client.EnableSsl = true;
-                 }
-                 if (txtattachment.Text != "")
-                 {
-                     message.Attachments.Add(new Attachment(txtattachment.Text));
-                 }
-                 client.Credentials = new System.Net.NetworkCredential(textEmail.Text, textPw.Text);
-                 client.Send(message);
-                 message = null;
-                 MessageBox.Show("E-mail sent");
-             }
-             catch(Exception s)
-             {
-                 MessageBox.Show("Failed to send e-mail");
-             }
-             */
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -318,14 +294,19 @@ namespace GUI
 
         private void button5_Click_1(object sender, EventArgs e)
         {
+            SendEmailAllGroup();
+        }
+        private void SendEmailAllGroup()
+        {
             string emailList = "";
             foreach (string email in EmailListBox.Items)
             {
                 emailList += $"{email.ToString()} ";
             }
-            MessageBox.Show(emailList);
+            
 
-            SendToMultipleUsers.SendEmail(emailList,txtsubject.Text,txtbody.Text);
+            SendToMultipleUsers.SendEmail(emailList, txtsubject.Text, txtbody.Text);
+            MessageBox.Show("Successfully sended!");
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -370,6 +351,42 @@ namespace GUI
             }
             MessageBox.Show(emailList);
         }
+
+        private void mailTimer_Tick(object sender, EventArgs e)
+        {
+            ms--;
+            timerTxt.Text = ms.ToString();
+            if(ms == 0)
+            {
+                ms = storedMs;
+                SendEmailAllGroup();
+            }
+
+        }
+
+        private void timerBtn_Click(object sender, EventArgs e)
+        {
+            mailTimer.Start();
+            mailTimer.Interval = 1000;
+        }
+
+        private void timerSetBtn_Click(object sender, EventArgs e)
+        {
+            ms = Convert.ToInt32(timerSetTextBox.Text);
+            storedMs = ms;
+            timerTxt.Text = ms.ToString();
+
+        }
+
+        private void stopTimerBtn_Click(object sender, EventArgs e)
+        {
+            mailTimer.Stop();
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 
     class ConnectDB
@@ -379,10 +396,12 @@ namespace GUI
             try
             {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "dudgnl23.database.windows.net";
-                builder.UserID = "benKim";
-                builder.Password = "dudgnl23@#";
+                builder.DataSource = "dudgnl23.database.windows.net";//"DESKTOP-8TH372Q";//"dudgnl23.database.windows.net";
+                builder.UserID = "benKim"; //"sa";//"benKim";
+                builder.Password = "dudgnl23@#"; //"dudgnl23";//"dudgnl23@#";
                 builder.InitialCatalog = "emailApp";
+                string connetionString = @"Data Source=DESKTOP-8TH372Q;Initial Catalog=emailApp;User ID=sa;Password=dudgnl23";
+
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
                     connection.Open();
@@ -410,10 +429,12 @@ namespace GUI
             try
             {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "dudgnl23.database.windows.net";
-                builder.UserID = "benKim";
-                builder.Password = "dudgnl23@#";
+                builder.DataSource = "dudgnl23.database.windows.net";//"DESKTOP-8TH372Q";//"dudgnl23.database.windows.net";
+                builder.UserID = "benKim"; //"sa";//"benKim";
+                builder.Password = "dudgnl23@#"; //"dudgnl23";//"dudgnl23@#";
                 builder.InitialCatalog = "emailApp";
+                string connetionString = @"Data Source=DESKTOP-8TH372Q;Initial Catalog=emailApp;User ID=sa;Password=dudgnl23";
+
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
                     connection.Open();
@@ -440,10 +461,12 @@ namespace GUI
             try
             {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "dudgnl23.database.windows.net";
-                builder.UserID = "benKim";
-                builder.Password = "dudgnl23@#";
+                builder.DataSource = "dudgnl23.database.windows.net";//"DESKTOP-8TH372Q";//"dudgnl23.database.windows.net";
+                builder.UserID = "benKim"; //"sa";//"benKim";
+                builder.Password = "dudgnl23@#"; //"dudgnl23";//"dudgnl23@#";
                 builder.InitialCatalog = "emailApp";
+                string connetionString = @"Data Source=DESKTOP-8TH372Q;Initial Catalog=emailApp;User ID=sa;Password=dudgnl23";
+           
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
                     connection.Open();
@@ -471,10 +494,12 @@ namespace GUI
             try
             {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "dudgnl23.database.windows.net";
-                builder.UserID = "benKim";
-                builder.Password = "dudgnl23@#";
+                builder.DataSource = "dudgnl23.database.windows.net";//"DESKTOP-8TH372Q";//"dudgnl23.database.windows.net";
+                builder.UserID = "benKim"; //"sa";//"benKim";
+                builder.Password = "dudgnl23@#"; //"dudgnl23";//"dudgnl23@#";
                 builder.InitialCatalog = "emailApp";
+                string connetionString = @"Data Source=DESKTOP-8TH372Q;Initial Catalog=emailApp;User ID=sa;Password=dudgnl23";
+
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
                     connection.Open();

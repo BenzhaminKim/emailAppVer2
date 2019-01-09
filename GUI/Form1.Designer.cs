@@ -58,7 +58,15 @@
             this.btnsend = new System.Windows.Forms.Button();
             this.btncancel = new System.Windows.Forms.Button();
             this.groupboxCompo = new System.Windows.Forms.GroupBox();
+            this.stopTimerBtn = new System.Windows.Forms.Button();
+            this.timerSetBtn = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.timerSetTextBox = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
+            this.timerBtn = new System.Windows.Forms.Button();
+            this.timerTxt = new System.Windows.Forms.Label();
+            this.EmailListBox = new System.Windows.Forms.ListBox();
             this.groupboxGrid = new System.Windows.Forms.GroupBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.dgvUserData = new System.Windows.Forms.DataGridView();
@@ -72,10 +80,12 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.label11 = new System.Windows.Forms.Label();
+            this.IdTextBox = new System.Windows.Forms.TextBox();
             this.contractBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.emailAppDataSet1 = new GUI.emailAppDataSet1();
+            this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
@@ -89,6 +99,8 @@
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userEmailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contractBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.emailAppDataSet2 = new GUI.emailAppDataSet2();
             this.EditButton = new System.Windows.Forms.Button();
             this.DeleteBtn = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -101,11 +113,9 @@
             this.addressBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.addressTableAdapter = new GUI.emailAppDataSetTableAdapters.addressTableAdapter();
             this.contractTableAdapter = new GUI.emailAppDataSet1TableAdapters.contractTableAdapter();
-            this.IdTextBox = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.EmailListBox = new System.Windows.Forms.ListBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.testGroupBtn = new System.Windows.Forms.Button();
+            this.serviceController1 = new System.ServiceProcess.ServiceController();
+            this.mailTimer = new System.Windows.Forms.Timer(this.components);
+            this.contractTableAdapter1 = new GUI.emailAppDataSet2TableAdapters.contractTableAdapter();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -117,11 +127,13 @@
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
-            this.bindingNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contractBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emailAppDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
+            this.bindingNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.contractBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emailAppDataSet2)).BeginInit();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.emailAppDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).BeginInit();
@@ -387,9 +399,14 @@
             // 
             // groupboxCompo
             // 
-            this.groupboxCompo.Controls.Add(this.testGroupBtn);
+            this.groupboxCompo.Controls.Add(this.stopTimerBtn);
+            this.groupboxCompo.Controls.Add(this.timerSetBtn);
+            this.groupboxCompo.Controls.Add(this.label13);
             this.groupboxCompo.Controls.Add(this.label12);
+            this.groupboxCompo.Controls.Add(this.timerSetTextBox);
             this.groupboxCompo.Controls.Add(this.button5);
+            this.groupboxCompo.Controls.Add(this.timerBtn);
+            this.groupboxCompo.Controls.Add(this.timerTxt);
             this.groupboxCompo.Controls.Add(this.EmailListBox);
             this.groupboxCompo.Controls.Add(this.txtbody);
             this.groupboxCompo.Controls.Add(this.btncancel);
@@ -411,6 +428,51 @@
             this.groupboxCompo.Text = "Compose";
             this.groupboxCompo.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // stopTimerBtn
+            // 
+            this.stopTimerBtn.Location = new System.Drawing.Point(668, 260);
+            this.stopTimerBtn.Name = "stopTimerBtn";
+            this.stopTimerBtn.Size = new System.Drawing.Size(75, 23);
+            this.stopTimerBtn.TabIndex = 26;
+            this.stopTimerBtn.Text = "stop";
+            this.stopTimerBtn.UseVisualStyleBackColor = true;
+            this.stopTimerBtn.Click += new System.EventHandler(this.stopTimerBtn_Click);
+            // 
+            // timerSetBtn
+            // 
+            this.timerSetBtn.Location = new System.Drawing.Point(668, 182);
+            this.timerSetBtn.Name = "timerSetBtn";
+            this.timerSetBtn.Size = new System.Drawing.Size(75, 23);
+            this.timerSetBtn.TabIndex = 25;
+            this.timerSetBtn.Text = "SET";
+            this.timerSetBtn.UseVisualStyleBackColor = true;
+            this.timerSetBtn.Click += new System.EventHandler(this.timerSetBtn_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(470, 189);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(68, 15);
+            this.label13.TabIndex = 24;
+            this.label13.Text = "Timer Set";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(42, 44);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(159, 15);
+            this.label12.TabIndex = 22;
+            this.label12.Text = "Mutlple sending Group:";
+            // 
+            // timerSetTextBox
+            // 
+            this.timerSetTextBox.Location = new System.Drawing.Point(551, 180);
+            this.timerSetTextBox.Name = "timerSetTextBox";
+            this.timerSetTextBox.Size = new System.Drawing.Size(100, 25);
+            this.timerSetTextBox.TabIndex = 23;
+            // 
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(421, 526);
@@ -420,6 +482,36 @@
             this.button5.Text = "sendTest";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            // 
+            // timerBtn
+            // 
+            this.timerBtn.Location = new System.Drawing.Point(668, 223);
+            this.timerBtn.Name = "timerBtn";
+            this.timerBtn.Size = new System.Drawing.Size(75, 23);
+            this.timerBtn.TabIndex = 22;
+            this.timerBtn.Text = "start";
+            this.timerBtn.UseVisualStyleBackColor = true;
+            this.timerBtn.Click += new System.EventHandler(this.timerBtn_Click);
+            // 
+            // timerTxt
+            // 
+            this.timerTxt.AutoSize = true;
+            this.timerTxt.Location = new System.Drawing.Point(559, 227);
+            this.timerTxt.Name = "timerTxt";
+            this.timerTxt.Size = new System.Drawing.Size(44, 15);
+            this.timerTxt.TabIndex = 21;
+            this.timerTxt.Text = "--:--";
+            // 
+            // EmailListBox
+            // 
+            this.EmailListBox.FormattingEnabled = true;
+            this.EmailListBox.ItemHeight = 15;
+            this.EmailListBox.Location = new System.Drawing.Point(218, 34);
+            this.EmailListBox.Name = "EmailListBox";
+            this.EmailListBox.Size = new System.Drawing.Size(513, 124);
+            this.EmailListBox.TabIndex = 21;
+            this.EmailListBox.DoubleClick += new System.EventHandler(this.Mouse);
+            this.EmailListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MouseDoubleClick);
             // 
             // groupboxGrid
             // 
@@ -577,10 +669,38 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Groups";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(326, 57);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(18, 15);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "Id";
+            this.label11.Click += new System.EventHandler(this.label11_Click);
+            // 
+            // IdTextBox
+            // 
+            this.IdTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.contractBindingSource1, "id", true));
+            this.IdTextBox.Location = new System.Drawing.Point(350, 54);
+            this.IdTextBox.Name = "IdTextBox";
+            this.IdTextBox.Size = new System.Drawing.Size(70, 25);
+            this.IdTextBox.TabIndex = 22;
+            // 
+            // contractBindingSource
+            // 
+            this.contractBindingSource.DataMember = "contract";
+            this.contractBindingSource.DataSource = this.emailAppDataSet1;
+            // 
+            // emailAppDataSet1
+            // 
+            this.emailAppDataSet1.DataSetName = "emailAppDataSet1";
+            this.emailAppDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // bindingNavigator1
             // 
             this.bindingNavigator1.AddNewItem = this.bindingNavigatorAddNewItem;
-            this.bindingNavigator1.BindingSource = this.contractBindingSource;
+            this.bindingNavigator1.BindingSource = this.contractBindingSource1;
             this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
             this.bindingNavigator1.DeleteItem = null;
             this.bindingNavigator1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -614,16 +734,6 @@
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(24, 24);
             this.bindingNavigatorAddNewItem.Text = "새로 추가";
-            // 
-            // contractBindingSource
-            // 
-            this.contractBindingSource.DataMember = "contract";
-            this.contractBindingSource.DataSource = this.emailAppDataSet1;
-            // 
-            // emailAppDataSet1
-            // 
-            this.emailAppDataSet1.DataSetName = "emailAppDataSet1";
-            this.emailAppDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // bindingNavigatorCountItem
             // 
@@ -701,13 +811,14 @@
             this.idDataGridViewTextBoxColumn,
             this.name,
             this.userEmailDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.contractBindingSource;
+            this.dataGridView1.DataSource = this.contractBindingSource1;
             this.dataGridView1.Location = new System.Drawing.Point(9, 152);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.Size = new System.Drawing.Size(426, 172);
             this.dataGridView1.TabIndex = 20;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // idDataGridViewTextBoxColumn
@@ -728,6 +839,16 @@
             this.userEmailDataGridViewTextBoxColumn.DataPropertyName = "userEmail";
             this.userEmailDataGridViewTextBoxColumn.HeaderText = "userEmail";
             this.userEmailDataGridViewTextBoxColumn.Name = "userEmailDataGridViewTextBoxColumn";
+            // 
+            // contractBindingSource1
+            // 
+            this.contractBindingSource1.DataMember = "contract";
+            this.contractBindingSource1.DataSource = this.emailAppDataSet2;
+            // 
+            // emailAppDataSet2
+            // 
+            this.emailAppDataSet2.DataSetName = "emailAppDataSet2";
+            this.emailAppDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // EditButton
             // 
@@ -829,53 +950,14 @@
             // 
             this.contractTableAdapter.ClearBeforeFill = true;
             // 
-            // IdTextBox
+            // mailTimer
             // 
-            this.IdTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.contractBindingSource, "id", true));
-            this.IdTextBox.Location = new System.Drawing.Point(350, 54);
-            this.IdTextBox.Name = "IdTextBox";
-            this.IdTextBox.Size = new System.Drawing.Size(70, 25);
-            this.IdTextBox.TabIndex = 22;
+            this.mailTimer.Interval = 1000;
+            this.mailTimer.Tick += new System.EventHandler(this.mailTimer_Tick);
             // 
-            // label11
+            // contractTableAdapter1
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(326, 57);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(18, 15);
-            this.label11.TabIndex = 23;
-            this.label11.Text = "Id";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
-            // 
-            // EmailListBox
-            // 
-            this.EmailListBox.FormattingEnabled = true;
-            this.EmailListBox.ItemHeight = 15;
-            this.EmailListBox.Location = new System.Drawing.Point(218, 34);
-            this.EmailListBox.Name = "EmailListBox";
-            this.EmailListBox.Size = new System.Drawing.Size(513, 124);
-            this.EmailListBox.TabIndex = 21;
-            this.EmailListBox.DoubleClick += new System.EventHandler(this.Mouse);
-            this.EmailListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MouseDoubleClick);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(42, 44);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(159, 15);
-            this.label12.TabIndex = 22;
-            this.label12.Text = "Mutlple sending Group:";
-            // 
-            // testGroupBtn
-            // 
-            this.testGroupBtn.Location = new System.Drawing.Point(534, 526);
-            this.testGroupBtn.Name = "testGroupBtn";
-            this.testGroupBtn.Size = new System.Drawing.Size(120, 35);
-            this.testGroupBtn.TabIndex = 23;
-            this.testGroupBtn.Text = "testGroup";
-            this.testGroupBtn.UseVisualStyleBackColor = true;
-            this.testGroupBtn.Click += new System.EventHandler(this.testGroupBtn_Click);
+            this.contractTableAdapter1.ClearBeforeFill = true;
             // 
             // Form1
             // 
@@ -892,7 +974,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
-            this.Text = "Automatic E-mail";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
@@ -913,12 +994,14 @@
             this.tabPage2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.contractBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emailAppDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.contractBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emailAppDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.contractBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emailAppDataSet2)).EndInit();
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.emailAppDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.addressBindingSource)).EndInit();
@@ -1003,7 +1086,17 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ListBox EmailListBox;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button testGroupBtn;
+        private System.ServiceProcess.ServiceController serviceController1;
+        private System.Windows.Forms.Timer mailTimer;
+        private System.Windows.Forms.Label timerTxt;
+        private System.Windows.Forms.Button timerBtn;
+        private System.Windows.Forms.TextBox timerSetTextBox;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button timerSetBtn;
+        private System.Windows.Forms.Button stopTimerBtn;
+        private emailAppDataSet2 emailAppDataSet2;
+        private System.Windows.Forms.BindingSource contractBindingSource1;
+        private emailAppDataSet2TableAdapters.contractTableAdapter contractTableAdapter1;
     }
 }
 
